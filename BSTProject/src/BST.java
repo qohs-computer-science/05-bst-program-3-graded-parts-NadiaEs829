@@ -1,5 +1,4 @@
 import java.lang.Comparable;
-
 public class BST implements BSTInterface
 {
 
@@ -45,17 +44,24 @@ public void printPostOrder(){
 }//end method
 
 
-private void addHelper(comparable newVal, root){
-    if( root.value >= newVal && root.left == null)
-        root.left = new TreeNode(newVal);
-    else if(root.value >= newVal)
-        addHelper(newVal, root.left);
-    else if(root.value < newVal && root.right == null)
+private void addHelper(comparable newVal, TreeNode root){
+    if( root >= newVal && root.getLeft == null)
+        root.setLeft(newVal);
+    else if(root >= newVal)
+        addHelper(newVal, root.left());
+    else if(root < newVal && root.right() == null)
         root.right = new TreeNode(newVal);
     else
-        addHelper(newVal, root.right);
+        addHelper(newVal, root.getRight());
 }//end addHelper method
 
+private void printlnHelper(TreeNode subroot){
+    if(subroot != null){
+        printlnHelper(subroot.getLeft());
+        System.out.println(subroot.getValue());
+        printlnHelper(subroot.left());
+    }//end if
+}//end printlnHelper
 
 
 }//end class

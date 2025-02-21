@@ -9,7 +9,7 @@
 
  public class BSTTester {
    public static void main(String[] args) {
-   
+   Tree
 	
  }//end main
 }//end class
