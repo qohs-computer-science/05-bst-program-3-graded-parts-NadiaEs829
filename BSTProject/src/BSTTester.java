@@ -9,7 +9,12 @@
 
  public class BSTTester {
    public static void main(String[] args) {
-   Tree
+   BST tree = new BST();
+    tree.add("Q");
+   System.out.println("This is pre order - current # of nodes: 1");
+   tree.printPreOrder();
+
+
 	
  }//end main
 }//end class
