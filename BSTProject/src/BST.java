@@ -3,6 +3,7 @@ public class BST implements BSTInterface
 {
 TreeNode root;
 
+
 public BST(){
 //creates an empty BST
     root = null;
@@ -11,6 +12,23 @@ public BST(){
 public void add(comparable newVal){
     root = addHelper(newVal,root);
 }//end add method
+
+public boolean delete(comparable old){
+    if(root == null)
+        return false;
+    else if(root > old)
+        root.setLeft(delete(root.getLeft(), old));
+    else if(root < old)
+        root.setRight(delete(root.getRight(), old));
+    else {
+        if(root.getLeft() == null && root.getRight() == null){
+            root = null;
+            return true;
+        }//end if
+        if(root.getLeft() == null)
+            return false;           //???
+    }//end else statement
+}//end delete
 
 public void printInOrder(){
     if(root != null){
