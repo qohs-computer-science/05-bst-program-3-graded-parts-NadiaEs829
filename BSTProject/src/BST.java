@@ -10,7 +10,11 @@ public BST(){
 }//end constructor 
 
 public void add(comparable newVal){
-    root = addHelper(newVal,root);
+     TreeNode val = new TreeNode (newVal);
+    if(root == null)
+        root = val;
+    else
+        root = addHelper(newVal,root);
 }//end add method
 
 public boolean delete(comparable old){
