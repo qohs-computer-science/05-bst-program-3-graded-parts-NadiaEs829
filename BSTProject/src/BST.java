@@ -17,11 +17,18 @@ public void add(Comparable newVal){
         root = addHelper(newVal,root);
 }//end add method
 
-/*public boolean delete(Comparable old){
+public boolean delete(Comparable old){
     if(root == null)
         return false;
-    else if(root > old)
+    else// if(root == old)
+        return true; //return deleteHelper(comparable old,TreeNode root);
+}//end delete
+    
+/* for the delete helper function 
+    else if(root > old){
         root.setLeft(delete(root.getLeft(), old));
+        return 
+    }
     else if(root < old)
         root.setRight(delete(root.getRight(), old));
     else {
@@ -32,8 +39,11 @@ public void add(Comparable newVal){
         if(root.getLeft() == null)
             return false;           //???
     }//end else statement
-}//end delete
+
 */
+private TreeNode deleteHelper(Comparable old, TreeNode root){
+
+}
 
 public void printInOrder(){
     if(root != null){
@@ -64,14 +74,21 @@ private TreeNode addHelper(Comparable newVal, TreeNode root){
         root = new TreeNode(newVal);
         return root;
     }//end if
-    else if(root.value >= newVal && root.getLeft() == null)
-        root.setLeft(newVal);
-    else if(root.getValue() > newVal)
+    else if(newVal.compareTo(root) <= 0 && root.getLeft() == null){
+    //root >= newVal ----> old statement - newVal <= root
+        root.setLeft((TreeNode) newVal);
+        //return root;
+    }//end 1st else if
+    else if(newVal.compareTo(root) < 0){ //root > newVal
         addHelper(newVal, root.getLeft());
-    else if(root < newVal && root.getRight() == null)
-        root.setRight(newVal);
+    }//end 2nd else if
+    else if(newVal.compareTo(root) < 0 && root.getRight() == null) {
+        root.setRight((TreeNode)newVal);
+        //return root;
+    }//end 3rd else if
     else
         addHelper(newVal, root.getRight());
+    return root;
 }//end addHelper method
 
 private void printlnHelper(TreeNode subroot){
