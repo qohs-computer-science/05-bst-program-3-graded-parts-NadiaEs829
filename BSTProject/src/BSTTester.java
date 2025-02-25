@@ -11,7 +11,7 @@
    public static void main(String[] args) {
    BST tree = new BST();
     tree.add("O");
-    tree.add("R");
+    //tree.add("R");
    System.out.println("This is pre order - current # of nodes: 2");
    tree.printPreOrder();
 

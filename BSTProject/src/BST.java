@@ -1,7 +1,7 @@
 import java.lang.Comparable;
 public class BST implements BSTInterface
 {
-TreeNode root;
+private TreeNode root;
 
 
 public BST(){
@@ -9,7 +9,7 @@ public BST(){
     root = null;
 }//end constructor 
 
-public void add(comparable newVal){
+public void add(Comparable newVal){
      TreeNode val = new TreeNode (newVal);
     if(root == null)
         root = val;
@@ -17,7 +17,7 @@ public void add(comparable newVal){
         root = addHelper(newVal,root);
 }//end add method
 
-public boolean delete(comparable old){
+/*public boolean delete(Comparable old){
     if(root == null)
         return false;
     else if(root > old)
@@ -33,6 +33,7 @@ public boolean delete(comparable old){
             return false;           //???
     }//end else statement
 }//end delete
+*/
 
 public void printInOrder(){
     if(root != null){
@@ -58,13 +59,14 @@ public void printPostOrder(){
     }//end if 
 }//end method
 
-
-private void addHelper(comparable newVal, TreeNode root){
-    if(root == null)
+private TreeNode addHelper(Comparable newVal, TreeNode root){
+    if(root == null){
         root = new TreeNode(newVal);
-    else if(root >= newVal && root.getLeft() == null)
+        return root;
+    }//end if
+    else if(root.value >= newVal && root.getLeft() == null)
         root.setLeft(newVal);
-    else if(root >= newVal)
+    else if(root.getValue() > newVal)
         addHelper(newVal, root.getLeft());
     else if(root < newVal && root.getRight() == null)
         root.setRight(newVal);

@@ -4,7 +4,7 @@ public class TreeNode
 	private TreeNode right;
 	private Comparable value;
 	
-	public TreeNode(comparable newVal)
+	public TreeNode(Comparable newVal)
 	{
 		value = newVal;
 		left = null;
