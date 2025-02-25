@@ -20,8 +20,9 @@ public void add(Comparable newVal){
 public boolean delete(Comparable old){
     if(root == null)
         return false;
-    else// if(root == old)
-        return true; //return deleteHelper(comparable old,TreeNode root);
+    else
+        root = deleteHelper(old, root); //return deleteHelper(comparable old,TreeNode root);
+    return false;
 }//end delete
     
 /* for the delete helper function 
@@ -42,8 +43,13 @@ public boolean delete(Comparable old){
 
 */
 private TreeNode deleteHelper(Comparable old, TreeNode root){
-
-}
+    if(root == null)
+        return root;
+    else if(old.compareTo(root) > 0){
+        
+    }
+    return root;
+}//end deleteHelper
 
 public void printInOrder(){
     if(root != null){
