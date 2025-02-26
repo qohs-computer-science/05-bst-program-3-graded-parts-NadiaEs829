@@ -10,11 +10,7 @@ public BST(){
 }//end constructor 
 
 public void add(Comparable newVal){
-     TreeNode val = new TreeNode (newVal);
-    if(root == null)
-        root = val;
-    else
-        root = addHelper(newVal,root);
+    root = addHelper(newVal,root);
 }//end add method
 
 public boolean delete(Comparable old){
@@ -42,7 +38,7 @@ public boolean delete(Comparable old){
     }//end else statement
 
 */
-private TreeNode deleteHelper(Comparable old, TreeNode root){
+private TreeNode deleteHelper(Comparable<TreeNode> old, TreeNode root){
     if(root == null)
         return root;
     else if(old.compareTo(root) > 0){
@@ -75,22 +71,22 @@ public void printPostOrder(){
     }//end if 
 }//end method
 
-private TreeNode addHelper(Comparable newVal, TreeNode root){
+private TreeNode addHelper(Comparable<TreeNode> newVal, TreeNode root){
     if(root == null){
         root = new TreeNode(newVal);
         return root;
     }//end if
     else if(newVal.compareTo(root) <= 0 && root.getLeft() == null){
-    //root >= newVal ----> old statement - newVal <= root
-        root.setLeft((TreeNode) newVal);
-        //return root;
+        //newVal.compareTo(root)
+        root.setLeft(new TreeNode(newVal));
+        return root;
     }//end 1st else if
-    else if(newVal.compareTo(root) < 0){ //root > newVal
-        addHelper(newVal, root.getLeft());
+    else if(newVal.compareTo(root) < 0){
+        addHelper(newVal,root.getLeft());
     }//end 2nd else if
-    else if(newVal.compareTo(root) < 0 && root.getRight() == null) {
-        root.setRight((TreeNode)newVal);
-        //return root;
+    else if(newVal.compareTo(root) > 0 && root.getRight() == null) {
+        root.setRight(new TreeNode(newVal));
+        return root;
     }//end 3rd else if
     else
         addHelper(newVal, root.getRight());

@@ -11,9 +11,9 @@
    public static void main(String[] args) {
    BST tree = new BST();
     tree.add("O");
-   // tree.add("R");
-  //  tree.add("C");
-   /* tree.add("H");
+    tree.add("R");
+    tree.add("C");
+    tree.add("H");
     tree.add("A");
     tree.add("R");
     tree.add("D");
@@ -23,11 +23,12 @@
     tree.add("N");
     tree.add("C");
     tree.add("E");
-    */
+  
   System.out.println("This is pre order - current # of nodes: 1");
   tree.printPreOrder();
-  System.out.println("This should output no nodes");
-  System.out.println(tree.delete("O"));
+  tree.printPostOrder();
+  //System.out.println("This should output no nodes");
+  //System.out.println(tree.delete("O"));
 
 	
  }//end main
