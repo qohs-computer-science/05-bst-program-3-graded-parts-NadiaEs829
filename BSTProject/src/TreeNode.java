@@ -47,4 +47,5 @@ public class TreeNode
 	{
 		right = newRight;
 	}
+
 }

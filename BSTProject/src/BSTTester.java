@@ -10,7 +10,7 @@
  public class BSTTester {
    public static void main(String[] args) {
    BST tree = new BST();
-   /*  tree.add("O");
+    tree.add("O");
     tree.add("R");
     tree.add("C");
     tree.add("H");
@@ -23,21 +23,14 @@
     tree.add("N");
     tree.add("C");
     tree.add("E");
-    */
-    tree.add("A");
-    tree.add("B");
-    tree.add("C");
-    tree.add("D");
-  
-  System.out.println("This is pre order");
-  tree.printPreOrder();
-  System.out.println("This is post order");
-  tree.printPostOrder();
-  System.out.println("This is in order");
-  tree.printInOrder();
-  //System.out.println("This should output no nodes");
-  //System.out.println(tree.delete("O"));
 
-	
+  System.out.println("This is pre order:");
+  tree.printPreOrder();
+  System.out.println("This is post order:");
+  tree.printPostOrder();
+  System.out.println("This is in order:");
+  tree.printInOrder();
+  
+
  }//end main
 }//end class
