@@ -4,7 +4,6 @@ public class BST implements BSTInterface
 private TreeNode root;
 private int treeNCount;
 
-
 public BST(){
 //creates an empty BST
     root = null;
@@ -43,17 +42,21 @@ private TreeNode addHelper(Comparable newVal, TreeNode root){
 public boolean delete(Comparable old){
     if(root == null)
         return false;
+
     if(old.compareTo(root.getValue()) < 0)
         root.setLeft(deleteHelper(old, root.getLeft()));
     else if(old.compareTo(root.getValue()) > 0)
         root.setRight(deleteHelper(old, root.getRight()));
     else{
         //case 1: no kids
-        if(root.getLeft() == null)
-            return true;
+        if(root.getLeft() == null){
+            root = null;
+            return false;
+        }
         //case 2: 1 kid
-        if(root.getRight() == null){
-            System.out.println(root.getLeft());
+        if(root.getRight() == null && old == root){
+            //System.out.println(root.getLeft());
+            root = root.getLeft();
             return true;
         }
         TreeNode succ = getSuccessor(root);
@@ -62,6 +65,7 @@ public boolean delete(Comparable old){
     }//end else
     treeNCount--;
     return false;
+    
 }//end delete
     
  /*for the delete helper function 
@@ -81,7 +85,9 @@ private TreeNode deleteHelper(Comparable old, TreeNode root){
         if(root.getLeft() == null && root.getRight() == null){
             root = null;
         }//end if
-        if(root.getLeft() == null)
+        if(root.getLeft() == null){
+            return root;
+        }//end if statement
                  //???
     }//end else statement{
     return root;
@@ -106,9 +112,9 @@ public boolean find(Comparable toFind){ //finish this
         return false;
     else if(toFind.compareTo(root.getValue()) == 0){
         return true;
-    }
-    else if()
-    return false;
+    }//end else if
+    else
+        return false;
 }//end method
 
 public boolean replace(Comparable old, Comparable toAdd){
