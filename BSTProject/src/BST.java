@@ -39,32 +39,12 @@ private TreeNode addHelper(Comparable newVal, TreeNode root){
     return root;
 }//end addHelper method
 
+//Part 2
 public boolean delete(Comparable old){
     if(root == null)
         return false;
-
-    if(old.compareTo(root.getValue()) < 0)
-        root.setLeft(deleteHelper(old, root.getLeft()));
-    else if(old.compareTo(root.getValue()) > 0)
-        root.setRight(deleteHelper(old, root.getRight()));
-    else{
-        //case 1: no kids
-        if(root.getLeft() == null){
-            root = null;
-            return false;
-        }
-        //case 2: 1 kid
-        if(root.getRight() == null && old == root){
-            //System.out.println(root.getLeft());
-            root = root.getLeft();
-            return true;
-        }
-        TreeNode succ = getSuccessor(root);
-        root.setValue(succ.getValue());
-        root.setRight(deleteHelper(old,root.getRight()));
-    }//end else
-    treeNCount--;
-    return false;
+    else
+        return deleteHelper(old, root);
 }//end delete
     
  /*for the delete helper function 
@@ -72,26 +52,44 @@ TreeNode temp = root;
 while(temp.rightRC == null)
     move temp RightChild
 */
-private TreeNode deleteHelper(Comparable old, TreeNode root){
+static TreeNode getSuccessor(TreeNode curr){
+    curr = curr.getRight();
+    while(curr != null && curr.getLeft() != null){
+    curr = curr.getLeft();
+    }//end while
+    return curr;
+}//end method
+
+private boolean deleteHelper(Comparable old, TreeNode root){
     if(root == null)
-        return root;
-    else if(old.compareTo(root.getValue()) < 0){ //root > old
-        root.setLeft(deleteHelper(old,root.getLeft()));
-    }
-    else if(old.compareTo(root.getValue()) > 0) //root < old
+        return false;
+    if(root.getValue().compareTo(old) > 0){
+        root = root.setLeft(deleteHelper(old,root.getLeft()));
+    }//end else if
+    else if(root.getValue().compareTo(old) < 0)
         root.setRight(deleteHelper(old,root.getRight()));
-    else {
+    else { 
+        //case 1 - node is a leaf
         if(root.getLeft() == null && root.getRight() == null){
             root = null;
+            return true;
         }//end if
-        if(root.getLeft() == null){
-            return root;
-        }//end if statement
-                 //???
-    }//end else statement{
-    return root;
+        // case 2 - node has 1 subtree
+        if(root.getLeft() == null)
+            return true;
+            //root.getRight()
+        else if(root.getRight() == null)
+            return true;
+            //root.getLeft()
+        //case 3 - node has 2 subtrees
+        TreeNode temp = root;
+        while(temp.getLeft() != null)
+            temp = temp.getLeft();
+    }//end else statement
+    return false;
 }//end deleteHelper
 
+//Part 3 - size(), IsEmpty(), find(), replace()
 public int size(){
     if(root == null)
         return 0;
@@ -104,26 +102,44 @@ if(root != null)
     return false;
 else 
     return true;
-}//end method
+}//end IsEmpty method
 
-public boolean find(Comparable toFind){ //finish this
+public boolean find(Comparable toFind){
     if(root == null)
         return false;
-    else if(toFind.compareTo(root.getValue()) == 0){
-        return true;
-    }//end else if
     else
-        return false;
-}//end method
+        return findHelper(toFind, root);
+}//end find method
 
-public boolean replace(Comparable old, Comparable toAdd){
-if(root == null)
+private boolean findHelper(Comparable toFind, TreeNode root){
+    if(root == null)
+        return false;
+    if(root.getValue().compareTo(toFind) == 0)
+        return true;
+
+    else if(root.getValue().compareTo(toFind) > 0)
+        return findHelper(toFind, root.getLeft());
+    else
+        return findHelper(toFind, root.getRight());
+}//end of findHelper method
+
+public boolean replace(Comparable old, Comparable toAdd){ //CHECK
+    boolean foundOld = find(old);
+    if(root == null)
+        return false;
+    else {
+        if((foundOld = true))
+            delete(old);
+            add(toAdd);
+        boolean foundToAdd = find(toAdd);
+        if(foundToAdd = true)
+            return true;
+    }//end else if
+
     return false;
-    else if()
-else 
-    return true;
 }//end replace method
 
+//Print methods
 public void printInOrder(){
     if(root != null){
         printlnHelper(root.getLeft());
@@ -155,12 +171,4 @@ private void printlnHelper(TreeNode subroot){
         printlnHelper(subroot.getRight()); //changed subroot.getLeft() --> subroot.getRight()
     }//end if
 }//end printlnHelper
-
-static TreeNode getSuccessor(TreeNode curr){
-    curr = curr.getRight();
-    while(curr != null && curr.getLeft() != null){
-    curr = curr.getLeft();
-    }//end while
-    return curr;
-}//end method
 }//end class

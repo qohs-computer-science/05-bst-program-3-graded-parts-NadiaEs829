@@ -9,6 +9,7 @@
 
  public class BSTTester {
    public static void main(String[] args) {
+  //Part 1
    BST tree = new BST();
     tree.add("O");
     tree.add("R");
@@ -30,7 +31,12 @@
   tree.printPostOrder();
   System.out.println("This is in order:");
   tree.printInOrder();
-  //System.out.println("Current size of BST: " + tree.size());
-  //System.out.println("BST is empty, T or F:  " + tree.IsEmpty());
+  //Part 2
+  
+  //Part 3
+  System.out.println("Current size of BST: " + tree.size());
+  System.out.println("BST is empty, T or F:  " + tree.IsEmpty());
+  System.out.println("Is Q in the BST? T or F: " + tree.find("Q"));
+  //System.out.println("Replacing A with W" + tree.replace("A", "W"));
  }//end main
 }//end class
