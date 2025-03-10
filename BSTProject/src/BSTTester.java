@@ -31,13 +31,15 @@
   tree.printPostOrder();
   System.out.println("This is in order:");
   tree.printInOrder();
+
+  System.out.println("Current size of BST: " + tree.size());
+  System.out.println("BST is empty, T or F:  " + tree.IsEmpty());
+  System.out.println("Is Q in the BST? T or F: " + tree.find("Q"));
   //Part 2
-  System.out.println(" Deleting R: ");
-  tree.delete("A");
+  System.out.println("Deleting R: ");
+  //tree.delete("A");
   //Part 3
-  //System.out.println("Current size of BST: " + tree.size());
-  //System.out.println("BST is empty, T or F:  " + tree.IsEmpty());
-  //System.out.println("Is Q in the BST? T or F: " + tree.find("Q"));
+  
   //System.out.println("Replacing A with W" + tree.replace("A", "W"));
  }//end main
 }//end class
