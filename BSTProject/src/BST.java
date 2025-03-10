@@ -60,17 +60,21 @@ static TreeNode getSuccessor(TreeNode curr){
     return curr;
 }//end method
 
+
 private boolean deleteHelper(Comparable old, TreeNode root){
     if(root == null)
         return false;
     if(root.getValue().compareTo(old) > 0){
-        root = root.setLeft(deleteHelper(old,root.getLeft()));
+        //return getLeft.deleteHelper(old,root.getLeft());
+        root.setLeft(deleteHelper(old,root.getLeft()));
     }//end else if
-    else if(root.getValue().compareTo(old) < 0)
+    else if(root.getValue().compareTo(old) < 0){
         root.setRight(deleteHelper(old,root.getRight()));
-    else { 
+    }//end else if
+    else {
         //case 1 - node is a leaf
         if(root.getLeft() == null && root.getRight() == null){
+            treeNCount--;
             root = null;
             return true;
         }//end if
@@ -79,17 +83,36 @@ private boolean deleteHelper(Comparable old, TreeNode root){
             return true;
             //root.getRight()
         else if(root.getRight() == null)
+            treeNCount--;
             return true;
             //root.getLeft()
         //case 3 - node has 2 subtrees
         TreeNode temp = root;
-        while(temp.getLeft() != null)
+        root.setValue(getSuccessor(temp));
+        if(root.getLeft() != null && root.getRight() != null)
+            old = root.getSuccessor(root);
+
+       /* while(temp.getLeft() != null){
             temp = temp.getLeft();
+            if(temp == old)
+                old = null;
+            treeNCount--;
+        */
+            return true;
+        //}//end while loop
+            while(temp.getRight() != null){
+                temp = temp.getRight();
+                if(temp == old)
+                old = null;
+            treeNCount--;
+            return true;
+        }//end while loop
     }//end else statement
     return false;
 }//end deleteHelper
 
 //Part 3 - size(), IsEmpty(), find(), replace()
+
 public int size(){
     if(root == null)
         return 0;
